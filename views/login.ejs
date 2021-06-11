@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+   <%- include('partials/_navbar')%>
+      <!-- end header inner -->
+      <!-- end header -->
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                     <h2>LOGIN</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--  contact -->
+      <div id="contact" class="contact offset-4">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6">
+                  <form method="POST" id="request" class="main_form" action="/users/login" autocomplete="off">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <input class="contactus" placeholder="email" type="type" name="email" required> 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus"  placeholder="Password" type="password" name="password" required>                          
+                        </div>
+                        <div class="col-md-12">
+                           <button class="send_btn">LOGIN</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end contact -->
+      <!--  footer -->
+      <%- include('partials/_footer')%>
+      <!-- end footer -->
+
+</html>

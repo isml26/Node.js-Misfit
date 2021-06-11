@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+   <%- include('partials/_navbar')%>
+      <!-- end header inner -->
+      <!-- end header -->
+      <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                     <h2>REGISTER</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--  contact -->
+      <div id="contact" class="contact offset-4">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6">
+                  <form method="POST" id="request" class="main_form" action="/users/register"  autocomplete="off">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <input class="contactus" placeholder="UserName" type="type" name="name"> 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus" placeholder="Email" type="email" name="email" required> 
+                        </div>
+                        <div class="col-md-12">
+                           <input class="contactus"  placeholder="Password" type="password" name="password" required>                          
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                           <select class="contactus" name="role" id="">
+                               <option>student</option>
+                               <option>trainer</option>
+                           </select>
+                       </div>
+                        <div class="col-md-12">
+                           <button class="send_btn">REGISTER</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end contact -->
+      <!--  footer -->
+      <%- include('partials/_footer')%>
+      <!-- end footer -->
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+   <%  %>
+   <%- include('partials/_navbar')%>
+      <!-- end header inner -->
+      <!-- end header -->
+       <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                   <h2><%=trainerName%></h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- latest news -->
+      <div class="latest">
+         <div class="container">
+            <div class="container">
+                <div class="latest">
+                    <div class="container">
+                       <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Exercise</th>
+                              <th scope="col">Set</th>
+                              <th scope="col">Rep</th>
+                              <th scope="col">Part</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                             <% for(let i=0; i < workouts.length; i++){%>
+                            <tr>
+                              <th scope="row"><%=i+1%></th>
+                              <td><%=workouts[i].exercise%></td>
+                              <td><%=workouts[i].set%></td>
+                              <td><%=workouts[i].rep%></td>
+                              <td><%=workouts[i].part%></td>
+                            <%}%>
+                          </tbody>
+                        </table>
+                    </div>
+                 </div>
+            </div>
+         </div>
+      </div>
+      <!-- end latest news -->
+   <!--  footer -->
+   <%- include('partials/_footer')%>
+
+   <!-- end header inner -->
+   <!-- end header -->
+   
+</html>

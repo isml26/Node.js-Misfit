@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+   <%- include('partials/_navbar')%>
+      <!-- end header inner -->
+      <!-- end header -->
+      <% if(user.role == 'student'){%>
+       <div class="back_re">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title">
+                   <h2>WORKOUTS</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- latest news -->
+      <div class="latest">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <div class="latest">
+                        <div class="container">
+                           <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Exercise</th>
+                                  <th scope="col">Set</th>
+                                  <th scope="col">Rep</th>
+                                  <th scope="col">Part</th>
+                                  <th scope="col">Trainer</th>
+                                  <th scope="col">Leave</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                 <% for(let i=0; i < workouts.length; i++){%>
+                                <tr>
+                                  <th scope="row"><%=i+1%>></th>
+                                  <td><%=workouts[i].exercise%></td>
+                                  <td><%=workouts[i].set%></td>
+                                  <td><%=workouts[i].rep%></td>
+                                  <td><%=workouts[i].part%></td>
+                                  <td><%=workouts[i].trainerName%></td>
+                                  <td><a href="/workouts/i?_method=DELETE"
+                                    onclick="return confirm('ARE YOU SURE')"
+                                    class="btn btn-danger rounded-0 text-white"><span>Leave</span></a></td>
+                                </tr>
+                                <%}%>
+                              </tbody>
+                            </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+
+            </div>
+         </div>
+      </div>
+      <!-- end latest news -->
+   <!--  footer -->
+   <%- include('partials/_footer')%>
+
+   <%}%>
+   <!-- end header inner -->
+   <!-- end header -->
+   <% if(user.role == 'trainer'){%>
+    <div class="back_re">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="title">
+                <h2>WORKOUTS</h2>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="container custom" style="padding-top: 20px;display: flex;">
+      <div class="col-md-12 col-sm-12 text-center ">
+         <button class="btn btn-lg btn-primary rounded-0 text-white" href="#" data-toggle="modal" data-target="#addWorkout"><span>CREATE NEW WORKOUT</span></button>
+      </div>
+   </div>
+   <div class="latest">
+      <div class="container">
+         <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Exercise</th>
+                <th scope="col">Set</th>
+                <th scope="col">Rep</th>
+                <th scope="col">Part</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+               <% for(let i=0; i < workouts.length; i++){%>
+              <tr>
+               <th scope="row"><%=i+1%>></th>
+                <td><%=workouts[i].exercise%></td>
+                <td><%=workouts[i].set%></td>
+                <td><%=workouts[i].rep%></td>
+                <td><%=workouts[i].part%></td>
+                <td><a href="/workouts/i?_method=DELETE"
+                  onclick="return confirm('ARE YOU SURE')"
+                  class="btn btn-danger rounded-0 text-white"><span>Delete</span></a></td>
+              </tr>
+              <%}%>
+            </tbody>
+          </table>
+      </div>
+   </div>
+   		<!-- ADD MODAL -->
+		<div class="modal fade" id="addWorkout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+               <div class="modal-body customer-box">
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                     <div class="tab-pane active" id="Login">
+                        <div class="container">
+          
+                              <div class="col-md-12">
+                                 <form method="POST" id="request" class="main_form" action="/workouts" autocomplete="off">
+                                    <div class="row">
+                                       <div class="col-md-12 ">
+                                          <input class="contactus" placeholder="Exercise" type="type" name="exercise"> 
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="contactus" placeholder="Set" type="type" name="set"> 
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="contactus" placeholder="Reps" type="type" name="rep">                          
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="contactus" placeholder="Part" type="type" name="part">                          
+                                       </div>
+                                       <div class="col-md-12">
+                                          <button class="send_btn">ADD</button>
+                                       </div>
+                                    </div>
+                                 </form>
+                              </div>
+                           
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </div>
+   <!-- latest news -->
+
+   <!-- end latest news -->
+<!--  footer -->
+<%- include('partials/_footer')%>
+
+<%}%>
+
+
+
+
+
+
+</html>
