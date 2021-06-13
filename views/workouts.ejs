@@ -44,7 +44,7 @@
                                   <td><%=workouts[i].rep%></td>
                                   <td><%=workouts[i].part%></td>
                                   <td><%=workouts[i].trainerName%></td>
-                                  <td><a href="/workouts/i?_method=DELETE"
+                                  <td><a href="/workouts/<%=i%>?_method=DELETE"
                                     onclick="return confirm('ARE YOU SURE')"
                                     class="btn btn-danger rounded-0 text-white"><span>Leave</span></a></td>
                                 </tr>
@@ -85,6 +85,19 @@
          <button class="btn btn-lg btn-primary rounded-0 text-white" href="#" data-toggle="modal" data-target="#addWorkout"><span>CREATE NEW WORKOUT</span></button>
       </div>
    </div>
+<div class="row text-center" style="padding-left: 30%;padding-right: 30%;padding-top:10px;">
+   <% if(flashMessages){%>
+      <% if(flashMessages.success){%>
+          <div class="col-md-12 alert alert-success">
+              <%=flashMessages.success%>
+          </div>
+          <% }else if (flashMessages.error){%>
+              <div class="col-md-12 alert alert-danger">
+                  <%=flashMessages.error%>
+              </div>
+              <%}%>       
+      <%}%> 
+</div>
    <div class="latest">
       <div class="container">
          <table class="table">
@@ -96,6 +109,7 @@
                 <th scope="col">Rep</th>
                 <th scope="col">Part</th>
                 <th scope="col">Delete</th>
+                <th scope="col">Update</th>
               </tr>
             </thead>
             <tbody>
@@ -106,12 +120,53 @@
                 <td><%=workouts[i].set%></td>
                 <td><%=workouts[i].rep%></td>
                 <td><%=workouts[i].part%></td>
-                <td><a href="/workouts/i?_method=DELETE"
+                <td><a href="/workouts/<%=i%>?_method=DELETE"
                   onclick="return confirm('ARE YOU SURE')"
                   class="btn btn-danger rounded-0 text-white"><span>Delete</span></a></td>
+                  <td><button
+                     class="btn btn-success rounded-0 text-white"
+                     data-toggle="modal" data-target="#updateWorkout<%=i%>"
+                     ><span>Update</span></button></td>
               </tr>
-              <%}%>
+                 <!-- Update MODAL -->
+		<div class="modal fade" id="updateWorkout<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+               <div class="modal-body customer-box">
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                     <div class="tab-pane active" id="Login">
+                        <div class="container">
+                              <div class="col-md-12">
+                                 <form method="POST" id="request" class="main_form" action="/workouts/<%=i%>?_method=PUT" autocomplete="off">
+                                    <div class="row">
+                                       <div class="col-md-12 ">
+                                          <input class="contactus" type="type" name="exercise" value='<%=workouts[i].exercise%>'> 
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="contactus" type="type" name="set" value='<%=workouts[i].set%>'> 
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="contactus" type="type" name="rep" value='<%=workouts[i].rep%>'>                          
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="contactus" type="type" name="part" value='<%=workouts[i].part%>'>                          
+                                       </div>
+                                       <div class="col-md-12">
+                                          <button class="send_btn">Update</button>
+                                       </div>
+                                    </div>
+                                 </form>
+                              </div>  
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </div>         
             </tbody>
+            <%}%>
           </table>
       </div>
    </div>
@@ -146,7 +201,6 @@
                                     </div>
                                  </form>
                               </div>
-                           
                         </div>
                      </div>
                   </div>
@@ -154,6 +208,11 @@
             </div>
          </div>
          </div>
+
+
+
+
+
    <!-- latest news -->
 
    <!-- end latest news -->

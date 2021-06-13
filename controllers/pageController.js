@@ -81,11 +81,11 @@ exports.sendEmail = async (req, res) => {
         // Preview only available when sending through an Ethereal account
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-        //req.flash("success", "Message Sended Successfully!!");
+        req.flash("success", "Message Sended Successfully!!");
 
         res.status(200).redirect('/contact');
     } catch (err) {
-        //req.flash("error", `An error occured while sending the message,pls try again`);
+        req.flash("error", `An error occured while sending the message,pls try again`);
         res.status(400).redirect('/contact');
     }
 };

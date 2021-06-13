@@ -1,27 +1,42 @@
 const User = require('../models/User');
 
 exports.addWorkout = async(req,res)=>{
-    const user = await User.findOne({_id:req.session.userID});
-    user.workouts.push(req.body);
-    user.save();
-    res.status(200).redirect('/users/workouts');
+    try {
+        const user = await User.findOne({_id:req.session.userID});
+        user.workouts.push(req.body);
+        user.save();
+        req.flash("success", `Workout Created Successfully!`);
+        res.status(200).redirect('/users/workouts');
+    } catch (error) {
+        req.flash("error", `Something Happened`);
+        req.status(400).redirect('/users/workouts');
+    }
 };
 exports.removeWorkout = async(req,res)=>{
+    try{
     const user = await User.findOne({_id:req.session.userID});
-    user.workouts.pop(req.params.id);
+    await user.workouts.splice(req.params.id,1);
     user.save();
+    req.flash("success", `Workout Removed Successfully!`);
     res.status(200).redirect('/users/workouts');
+    }catch(err){
+        req.flash("error", `Something Happened`);
+        req.status(400).redirect('/users/workouts');
+    }
 };
 exports.getTrainerWorkouts = async(req,res)=>{
     try {
         if(req.session.userID){
         const trainer = await User.findOne({_id:req.params.id});
-        const student = await User.findOne({_id:req.session.userID});
+        //here i assume that user is student
+        const currentUser = await User.findOne({_id:req.session.userID});
         const workouts = trainer.workouts;
         const trainerName = trainer.name;
         const trainerId = trainer._id;
-        const studentWorkouts = student.workouts;
-    
+        const studentWorkouts = currentUser.workouts;
+        //if user is not student
+        const isStudentOrTrainer = currentUser.role;
+
         //we can assume that we have unique ids
         function extractValue(arr, prop) {
             let extractedValue = arr.map(item => item[prop]);
@@ -37,6 +52,7 @@ exports.getTrainerWorkouts = async(req,res)=>{
             trainerName,
             trainerId,
             result,
+            isStudentOrTrainer,
         });}
         else{
             const trainer = await User.findOne({_id:req.params.id});
@@ -75,3 +91,20 @@ exports.enrollWorkout = async (req, res) => {
         })
     }
 };
+exports.updateWorkout = async (req,res)=>{
+    try {
+        const user = await User.findOne({_id:req.session.userID});
+        const updatedIndex = req.params.id;
+        const workout = req.body;
+        user.workouts.pop(req.params.id);
+        user.workouts.splice(updatedIndex,0,workout);
+        console.log(workout);
+        console.log(updatedIndex);
+        user.save();
+        req.flash("success", `Workout Updated Successfully!`);
+        res.status(200).redirect('/users/workouts');
+    } catch (error) {
+        req.flash("error", `Something Happened`);
+        req.status(400).redirect('/users/workouts');
+    }
+}

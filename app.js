@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const MongoStore = require('connect-mongo');
 const methodOverride = require("method-override");
+const flash = require('connect-flash');
 const pageRoute = require('./routes/pageRoute');
 const userRoute = require('./routes/userRoute');
 const workoutRoute = require('./routes/workoutRoute');
@@ -25,15 +26,23 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: URL })
 }));
+
 //Global variable for keep user logged in
 global.userIN = null;
 app.use('*',(req,res,next)=>{
   userIN = req.session.userID;
   next();
 });
+
 app.use(methodOverride('_method', {
   methods: ['POST', 'GET']
 }));
+
+app.use(flash());
+app.use((req,res,next)=>{
+  res.locals.flashMessages = req.flash();
+  next();
+})
 
 const PORT = process.env.PORT || 3000 ;
 

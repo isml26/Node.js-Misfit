@@ -28,7 +28,9 @@
                               <th scope="col">Set</th>
                               <th scope="col">Rep</th>
                               <th scope="col">Part</th>
+                              <% if (isStudentOrTrainer == 'student'){%>
                               <th scope="col">Enroll</th>
+                              <%}%>
                             </tr>
                           </thead>
                           <tbody>
@@ -39,7 +41,7 @@
                               <td><%=workouts[i].set%></td>
                               <td><%=workouts[i].rep%></td>
                               <td><%=workouts[i].part%></td>
-                              <% if(!result.includes(workouts[i].exercise)){%>
+                              <% if(!result.includes(workouts[i].exercise) && isStudentOrTrainer == 'student'){%>
                               <td><form method="POST" action="/workouts/enroll">
                                  <input type="hidden" name="workoutIndex" value="<%=i%>">
                                  <input type="hidden" name="trainerId" value="<%=trainerId%>">
